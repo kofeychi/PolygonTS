@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.kofeychi.polygonts.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "polygonts.refmap.json",
+  "mixins": [
+    "EventBusMixin",
+    "ObjectHandlerMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "verbose": true,
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
