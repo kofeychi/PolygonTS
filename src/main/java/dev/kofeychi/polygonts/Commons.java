@@ -1,14 +1,13 @@
 package dev.kofeychi.polygonts;
 
-import dev.kofeychi.polygonts.util.SubscribeEventForge;
-import dev.kofeychi.polygonts.util.SubscribeEventGame;
+import dev.kofeychi.polygonts.impl.util.SubscribeEventForge;
+import dev.kofeychi.polygonts.impl.util.SubscribeEventGame;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 
 public class Commons {
     public static void subscribeIfHas(Object that, IEventBus game, Class<?> cls){

@@ -9,9 +9,14 @@ import java.util.Arrays;
 public interface PolyTSPaths {
     Path GAMEDIR = FMLPaths.GAMEDIR.get();
     Path POLYTS = GAMEDIR.resolve("polygonts");
+    Path NATIVE = POLYTS.resolve("native");
+    // scripts
+    Resolver LIBRARY = resolvable(NATIVE);
     Path SCRIPTS = POLYTS.resolve("scripts");
-    Path INITSCRIPTS = SCRIPTS.resolve("init");
-    Path INITSCOMMON = INITSCRIPTS.resolve("common");
+    Path INIT_SCRIPTS = SCRIPTS.resolve("init");
+    Path INIT_SCOMMON = INIT_SCRIPTS.resolve("common");
+    Resolver INITS_COMMON = resolvable(INIT_SCOMMON);
+    // cache
     Resolver SCRIPT_CACHE = resolvable(POLYTS);
 
     static void prepare(){

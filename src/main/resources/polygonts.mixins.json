@@ -5,7 +5,6 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "polygonts.refmap.json",
   "mixins": [
-    "EventBusMixin",
     "ObjectHandlerMixin"
   ],
   "client": [

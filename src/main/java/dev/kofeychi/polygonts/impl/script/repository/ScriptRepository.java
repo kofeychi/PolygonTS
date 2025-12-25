@@ -1,0 +1,38 @@
+package dev.kofeychi.polygonts.impl.script.repository;
+
+import com.mojang.logging.LogUtils;
+import dev.kofeychi.polygonts.PolygonTS;
+import dev.kofeychi.polygonts.api.script.repository.IScriptRepository;
+import dev.kofeychi.polygonts.api.script.file.MediaType;
+import net.minecraft.resources.ResourceLocation;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Locale;
+
+public abstract class ScriptRepository implements IScriptRepository {
+    protected final Path rootDirectory;
+    protected final String namespace;
+    protected final ArrayList<MediaType> fileExtension;
+
+    public ScriptRepository(Path parentDirectory,Collection<MediaType> fileExtension) {
+        this.rootDirectory = parentDirectory.getParent().toAbsolutePath();
+        this.namespace = parentDirectory.getFileName().toString();
+        this.fileExtension = new ArrayList<>(fileExtension);
+        PolygonTS.LOGGER.info("Root Directory: {}", this.rootDirectory);
+        PolygonTS.LOGGER.info("Namespace : {}", this.namespace);
+        PolygonTS.LOGGER.info("FileExtension : {}", this.fileExtension);
+    }
+
+    protected ResourceLocation createLocation(Path file) {
+        String relativePath = rootDirectory.relativize(file).toString();
+        relativePath = relativePath.replace("\\", "/").substring(0,relativePath.lastIndexOf('.'));;
+        String sanitizedPath = relativePath.toLowerCase(Locale.ROOT);
+        if (!ResourceLocation.isValidPath(sanitizedPath)) {
+            LogUtils.getLogger().warn("Skipping file with invalid characters for ResourceLocation: {}", relativePath);
+            return null;
+        }
+        return ResourceLocation.fromNamespaceAndPath(this.namespace, sanitizedPath);
+    }
+}
